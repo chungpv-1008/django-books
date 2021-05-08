@@ -2,7 +2,7 @@ version: '3'
 services:
     web:
         build: .
-        command: python3 /code/manage.py runserver 0.0.0.0:8000
+        command: python3 /code/manage.py runserver
         volumes:
             - .:/code
         ports:
@@ -10,7 +10,7 @@ services:
         depends_on:
             - db
         env_file:
-            - .env
+            - ./bookstore/.env
     db:
         image: mysql:8.0.20
         restart: always
@@ -25,4 +25,4 @@ services:
         ports:
             - '3305:3306'
         env_file:
-            - .env
+            - ./bookstore/.env

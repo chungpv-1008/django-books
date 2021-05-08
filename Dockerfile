@@ -13,5 +13,4 @@ COPY Pipfile Pipfile.lock requirements.txt /code/
 RUN pip3 install pipenv && pipenv install --system && pip3 install -r requirements.txt
 
 # Copy project
-COPY .env /code/
 COPY . /code/
