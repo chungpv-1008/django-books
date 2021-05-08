@@ -1,0 +1,28 @@
+version: '3'
+services:
+    web:
+        build: .
+        command: python3 /code/manage.py runserver 0.0.0.0:8000
+        volumes:
+            - .:/code
+        ports:
+            - 8000:8000
+        depends_on:
+            - db
+        env_file:
+            - .env
+    db:
+        image: mysql:8.0.20
+        restart: always
+        command: --default-authentication-plugin=mysql_native_password --mysqlx=0
+        environment:
+            MYSQL_DATABASE: books
+            MYSQL_USER: root
+            MYSQL_PASSWORD: 12345678
+            MYSQL_ROOT_PASSWORD: 12345678
+        volumes:
+            - ".dbdata:/var/lib/mysql"
+        ports:
+            - '3305:3306'
+        env_file:
+            - .env
