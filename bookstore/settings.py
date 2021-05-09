@@ -23,6 +23,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "bootstrap4",
+    "crispy_forms",
     "accounts",
     "pages",
 ]
@@ -93,12 +95,15 @@ USE_L10N = True
 
 USE_TZ = True
 
-STATIC_URL = "/static/"
-
 MEDIA_URL = "/media/"
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "bookstore/static")
+
+STATIC_URL = "/static/"
+STATICFILES_DIRS = [str(BASE_DIR.joinpath("static"))]   # new
+STATIC_ROOT = str(BASE_DIR.joinpath("staticfiles"))     # new
+STATICFILES_FINDERS = [     # new
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 ]
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
@@ -108,3 +113,5 @@ AUTH_USER_MODEL = "accounts.CustomUser"
 LOGIN_REDIRECT_URL = "home"
 
 LOGOUT_REDIRECT_URL = "home"
+
+CRISPY_TEMPLATE_PACK = "bootstrap4"
